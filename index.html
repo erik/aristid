@@ -1,0 +1,75 @@
+<!doctype html>
+<head>
+  <style>
+  html, body {
+      margin: 0;
+      overflow: hidden;
+      height: 100%;
+  }
+   #sidebar {
+       padding: 2em;
+       position: absolute;
+       width: 25%;
+       color: #aaa;
+       background-color: transparent;
+   }
+
+   #input label {
+       padding: 1em;
+   }
+
+   textarea {
+       height: 10em;
+       width: 100%;
+       background-color: transparent;
+       color: #aaa;
+       font-family: Monospace;
+       font-size: large;
+   }
+
+  /* Scale canvas with resize attribute to full size */
+   canvas[resize] {
+       max-width: 100%;
+       height: 100%;
+   }
+  </style>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/rivets/0.9.0/rivets.bundled.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/paper.js/0.9.25/paper-full.min.js"></script>
+
+  <script type="text/javascript" src="/index.js"></script>
+
+</head>
+
+<body>
+    <div id="sidebar">
+        <h1>Aristid</h1>
+        <br />
+        <div id="input" rv-on-change="controller.update"
+                        rv-on-keypress="controller.update">
+            <label>Angle:</label>
+            <input id="angle" rv-value="system.angle" type="number">
+
+            <br />
+
+            <label>Iterations</label>
+            <input id="iter" rv-value="system.iter" type="number">
+
+            <br />
+
+            <label>Start Rule</label>
+            <input id="start" rv-value="system.start">
+
+            <br />
+
+            <textarea id="rules" rv-value="system.rules | rules"></textarea>
+        </div>
+    </div>
+
+    <canvas id="canvas" width="75%" resize></canvas>
+
+    <script type="text/javascript">
+      $(document).ready(init);
+    </script>
+</body>
