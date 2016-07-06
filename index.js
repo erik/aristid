@@ -45,6 +45,8 @@ function init() {
         }
     });
 
+    $(window).resize(function() { render(system); });
+
     render(system);
 }
 
