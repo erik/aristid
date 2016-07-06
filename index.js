@@ -1,6 +1,6 @@
 var DEFAULT_SYSTEMS = {
     'koch': {
-        'angle': 36,
+        'angle': 90,
         'start': 'F',
         'rules': {
             'F': 'F-F+F[X]+F-F',
