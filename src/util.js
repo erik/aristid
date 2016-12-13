@@ -1,56 +1,22 @@
-var DEFAULT_SYSTEMS = {
-    'koch': {
-        'angle': 90,
-        'start': 'F',
-        'rules': {
-            'F': 'F-F+F[X]+F-F',
-            'X': '+X'
-        },
-        'iter': 5,
-        'smooth': false
+import * as paper from "paper";
+
+
+export function parseRules(rulesStr) {
+    var lines = rulesStr.split('\n');
+    var rules = {};
+
+    for (var idx in lines) {
+        var pair = lines[idx].split('->');
+
+        if (pair.length !== 2) continue;
+
+        rules[pair[0].trim()] = pair[1].trim();
     }
-};
 
-var system = Object.assign({}, DEFAULT_SYSTEMS.koch);
-
-function init() {
-    paper.setup(document.getElementById('canvas'));
-    rivets.configure({preloadData: true});
-    rivets.bind($('#input'), {
-        data: {
-            system: system
-        },
-        controller: {
-            update: function(ev, model) {
-                model.data.system.angle = +$("#angle").val() || system.angle;
-                model.data.system.iter = +$("#iter").val() || system.iter;
-                model.data.system.start = $("#start").val() || "F";
-
-                model.data.system.rules = {};
-                var lines = $("#rules").val().split('\n');
-
-                for (var idx in lines) {
-                    var pair = lines[idx].split("->");
-
-                    if (pair.length !== 2) {
-                        continue;
-                    }
-
-                    model.data.system.rules[pair[0].trim()] = pair[1].trim();
-                }
-
-
-                render(model.data.system);
-            }
-        }
-    });
-
-    $(window).resize(function() { render(system); });
-
-    render(system);
+    return rules;
 }
 
-function render(system) {
+export function renderSystem(system) {
     var movement = new paper.Point(0, -10);
     paper.project.clear();
 
@@ -78,9 +44,9 @@ function render(system) {
                 break;
             }
             case ']': {
+                path.moveTo(currentPoint);
                 movement = stack.pop();
                 currentPoint = stack.pop();
-                path.moveTo(currentPoint);
                 break;
             }
             default:
@@ -126,4 +92,9 @@ function render(system) {
     paper.view.draw();
 
     return path;
+}
+
+
+export function initCanvas() {
+    paper.setup(document.getElementById('canvas'));
 }
