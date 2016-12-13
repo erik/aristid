@@ -44,14 +44,14 @@ export function renderSystem(system) {
                 break;
             }
             case ']': {
-                path.moveTo(currentPoint);
                 movement = stack.pop();
                 currentPoint = stack.pop();
+                path.moveTo(currentPoint);
                 break;
             }
             default:
                 if (command == command.toUpperCase()) {
-                    currentPoint = currentPoint.add([movement.x ,movement.y]);
+                    currentPoint = currentPoint.add([movement.x, movement.y]);
                     path.lineTo(currentPoint);
                 }
 

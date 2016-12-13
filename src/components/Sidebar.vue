@@ -6,14 +6,16 @@
       <label>Angle:</label>
       <input v-model.number="angle" type="number">
       <br />
+      
       <label>Iterations</label>
       <input v-model.number="iter" type="number">
       <br />
+      
       <label>Start Rule</label>
       <input v-model="start">
       <br />
+      
       <textarea v-model="rules"></textarea>
-
       <small>Frame took {{ frameTime }} ms to render</small>
     </div>
   </div>
@@ -31,7 +33,8 @@ export default {
         start: 'F',
         iter: 5,
         rules: 'F -> F-F+F[X]+F-F\nX -> +X\n',
-        frameStart: 0, frameEnd: 0
+        frameStart: 0,
+        frameEnd: 0
     }),
     watch: {
         angle() { this.render(); },
