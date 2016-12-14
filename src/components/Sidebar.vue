@@ -1,5 +1,5 @@
 <template>
-  <div id="sidebar" v-on:resize="render()">
+  <div id="sidebar">
     <h1>Aristid</h1>
     <br />
     <div id="input">
